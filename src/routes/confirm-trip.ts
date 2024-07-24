@@ -24,7 +24,7 @@ export async function confirmTrip(app: FastifyInstance) {
         id: tripId,
       },
       include: {
-        participant: {
+        participants: {
           where: {
             is_owner: false,
           },
@@ -56,7 +56,7 @@ export async function confirmTrip(app: FastifyInstance) {
     const mail = await getMailClient();
 
     await Promise.all(
-      trip.participant.map(async (participant) => {
+      trip.participants.map(async (participant) => {
         const confirmationLink = `http://localhost:3333/trips/${trip.id}/confirm/${participant.id}`;
 
         const message = await mail.sendMail({
