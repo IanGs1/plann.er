@@ -49,7 +49,7 @@ export async function getActivities(app: FastifyInstance) {
         };
       });
 
-      return activities;
+      return { activities };
     },
   );
 };
