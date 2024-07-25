@@ -1,6 +1,8 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 
+import { errorHandler } from "./error-handler";
+
 import { serializerCompiler, validatorCompiler } from "fastify-type-provider-zod";
 
 import { createTrip } from "./routes/create-trip";
@@ -26,6 +28,8 @@ app.register(cors, {
 
 app.setValidatorCompiler(validatorCompiler);
 app.setSerializerCompiler(serializerCompiler);
+
+app.setErrorHandler(errorHandler);
 
 app.register(createTrip);
 app.register(confirmTrip);

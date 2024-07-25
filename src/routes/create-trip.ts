@@ -9,6 +9,7 @@ import nodemailer from "nodemailer";
 
 import { prisma } from "../lib/prisma";
 import { getMailClient } from "../lib/mail";
+import { ClientError } from "../errors/client-error";
 
 export async function createTrip(app: FastifyInstance) {
   app.withTypeProvider<ZodTypeProvider>().post("/trips", {
@@ -50,12 +51,12 @@ export async function createTrip(app: FastifyInstance) {
 
     const startsAtDateIsInvalid = dayjs(starts_at).isBefore(new Date());
     if (startsAtDateIsInvalid) {
-      throw new Error("Invalid Trip Start Date");
+      throw new ClientError("Invalid Trip Start Date");
     };
 
     const endsAtDateIsInvalid = dayjs(ends_at).isBefore(starts_at);
     if (endsAtDateIsInvalid) {
-      throw new Error("Invalid Trip End Date");
+      throw new ClientError("Invalid Trip End Date");
     };
 
     const formatedStartDate = dayjs(starts_at).format("LL")
