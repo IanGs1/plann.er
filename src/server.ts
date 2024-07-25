@@ -8,6 +8,7 @@ import { confirmTrip } from "./routes/confirm-trip";
 
 import { createActivity } from "./routes/create-activity";
 import { getActivities } from "./routes/get-activities";
+import { updateTrip } from "./routes/update-trip";
 
 import { createLink } from "./routes/create-link";
 import { getLinks } from "./routes/get-links";
@@ -26,6 +27,7 @@ app.setSerializerCompiler(serializerCompiler);
 
 app.register(createTrip);
 app.register(confirmTrip);
+app.register(updateTrip)
 
 app.register(createActivity);
 app.register(getActivities);
